@@ -3,6 +3,11 @@
     <PropertyGroup>
         <OutputType>Exe</OutputType>
         <TargetFramework>net5.0</TargetFramework>
+        <RootNamespace>FloatComparison</RootNamespace>
     </PropertyGroup>
+
+    <ItemGroup>
+      <Compile Remove="StringConcatTesting.cs" />
+    </ItemGroup>
 
 </Project>
