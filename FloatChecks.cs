@@ -7,6 +7,113 @@ namespace SpeedTests
 {
     public class FloatChecks
     {
+        public static void FloatMinTest()
+        {
+            Console.WriteLine("Running FloatMinTest");
+            Stopwatch sw = new Stopwatch();
+            List<float> floatList = new List<float>(Constants.k_IterationCount);
+
+            Random random = new Random(Constants.k_Seed);
+
+            sw.Start();
+            for (int i = 0; i < Constants.k_IterationCount; i++)
+            {
+                floatList.Add((float)random.NextDouble());
+            }
+            sw.Stop();
+            Console.WriteLine($"Setup time:{sw.ElapsedMilliseconds} ms");
+            
+            sw.Reset();
+            
+            float minVal = 0;
+            sw.Start();
+            for (int i = 0; i < Constants.k_IterationCount - 2; i++)
+            {
+                minVal += Min1(floatList[i], floatList[i + 1], floatList[i + 2]);
+            }
+            sw.Stop();
+            Console.WriteLine($"Max1: minVal:{minVal} - test duration:{sw.ElapsedMilliseconds} ms");
+            
+            minVal = 0;
+            sw.Reset();
+            
+            sw.Start();
+            for (int i = 0; i < Constants.k_IterationCount - 2; i++)
+            {
+                minVal += Min2(floatList[i], floatList[i + 1], floatList[i + 2]);
+            }
+            sw.Stop();
+            Console.WriteLine($"Max2: minVal:{minVal} - test duration:{sw.ElapsedMilliseconds} ms");
+            sw.Reset();
+        }
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float MinInline(float v1, float v2)
+        {
+            return v1 < v2 ? v1 : v2;
+        }
+        public static float Min(float v1, float v2)
+        {
+            return v1 < v2 ? v1 : v2;
+        }
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float Min1(float v1, float v2, float v3)
+        {
+            return Math.Min(Math.Min(v1, v2), v3);
+        }
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float Min2(float v1, float v2, float v3)
+        {
+            return v1 > v2 ? (v2 > v3 ? v3 : v2) : (v1 > v3 ? v3 : v1);
+        }
+        public static void FloatMaxTest()
+        {
+            Console.WriteLine("Running FloatMaxTest");
+            Stopwatch sw = new Stopwatch();
+            List<float> floatList = new List<float>(Constants.k_IterationCount);
+
+            Random random = new Random(Constants.k_Seed);
+
+            sw.Start();
+            for (int i = 0; i < Constants.k_IterationCount; i++)
+            {
+                floatList.Add((float)random.NextDouble());
+            }
+            sw.Stop();
+            Console.WriteLine($"Setup time:{sw.ElapsedMilliseconds} ms");
+            
+            sw.Reset();
+            
+            float maxTotal = 0;
+            sw.Start();
+            for (int i = 0; i < Constants.k_IterationCount - 2; i++)
+            {
+                maxTotal += Max1(floatList[i], floatList[i + 1], floatList[i + 2]);
+            }
+            sw.Stop();
+            Console.WriteLine($"Max1: maxTotal:{maxTotal} - test duration:{sw.ElapsedMilliseconds} ms");
+            
+            maxTotal = 0;
+            sw.Reset();
+            
+            sw.Start();
+            for (int i = 0; i < Constants.k_IterationCount - 2; i++)
+            {
+                maxTotal += Max2(floatList[i], floatList[i + 1], floatList[i + 2]);
+            }
+            sw.Stop();
+            Console.WriteLine($"Max2: maxTotal:{maxTotal} - test duration:{sw.ElapsedMilliseconds} ms");
+            sw.Reset();
+        }
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float Max1(float v1, float v2, float v3)
+        {
+            return Math.Max(Math.Max(v1, v2), v3);
+        }
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float Max2(float v1, float v2, float v3)
+        {
+            return v1 < v2 ? (v2 < v3 ? v3 : v2) : (v1 < v3 ? v3 : v1);
+        }
         public static void FloatCompareTest()
         {
             Console.WriteLine("Running FloatCompareTest");

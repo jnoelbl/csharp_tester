@@ -25,19 +25,22 @@ namespace SpeedTests
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool IsEqualShortCircuit(Vec4 lhs, Vec4 rhs, float precision = Constants.k_Epsilon)
             {
-                if (FastApproximately(rhs.x, lhs.x, precision) == false)
-                    return false;
-                if (FastApproximately(rhs.y, lhs.y, precision) == false)
-                    return false;
-                if (FastApproximately(rhs.z, lhs.z, precision) == false)
-                    return false;
-                return FastApproximately(rhs.w, lhs.w, precision);
+                return FastApproximately(rhs.x, lhs.x, precision) &&
+                       FastApproximately(rhs.y, lhs.y, precision) && 
+                       FastApproximately(rhs.z, lhs.z, precision) && 
+                       FastApproximately(rhs.w, lhs.w, precision);
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static bool FastApproximately(float a, float b, float precision = Constants.k_Epsilon)
+            private static bool FastApproximately(float a, float b, float precision = Constants.k_Epsilon)
             {
-                return ((a - b) < 0 ? ((a - b) * -1) : (a - b)) <= precision;
+                // cache the difference for use
+                float diff = a - b;
+                // Comparables are supposed to return
+                // 0 if equal,
+                // > 0 if v1 comes before v2,
+                // < 0 if v1 comes after v2
+                return diff * (double) diff < precision * (double) precision;
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -55,6 +58,22 @@ namespace SpeedTests
                 float num3 = lhs.z - rhs.z;
                 float num4 = lhs.w - rhs.w;
                 return num1 * (double) num1 + num2 * (double) num2 + num3 * (double) num3 + num4 * (double) num4 < Constants.k_SquaredEpsilon;
+            }
+
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static int Vector4Compare(Vec4 lhs, Vec4 rhs, float precision = Constants.k_Epsilon)
+            {
+                    int value = Shared.FloatCompare(lhs.x, rhs.x, precision);
+                    if (value != 0) 
+                        return value;
+            
+                    value = Shared.FloatCompare(lhs.y, rhs.y, precision);
+                    if (value != 0) 
+                        return value;
+            
+                    value = Shared.FloatCompare(lhs.z, rhs.z, precision);
+            
+                    return value != 0 ? value : Shared.FloatCompare(lhs.w, rhs.w, precision);
             }
         }
 }

@@ -7,6 +7,21 @@ namespace SpeedTests
 {
     public class StringChecks
     {
+        public static void StringLiteralCheck()
+        {
+            string literal = @"Testing item
+                More text 
+                some more text
+                each might be a new line, which is what I'm afraid of.";
+
+            string nonLiteral = "Testin item " +
+                                "More Text " +
+                                "some more text " +
+                                "each should be a new line, which is what I'm afraid of.";
+            
+            Console.WriteLine($"Literal:\n{literal}");
+            Console.WriteLine($"NonLiteral:\n{nonLiteral}");
+        }
         public static void StringConcatFormatTesting()
         {
             int count = Constants.k_IterationCount * 6;

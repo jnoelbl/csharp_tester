@@ -1,15 +1,25 @@
-﻿namespace SpeedTests
+﻿using System;
+
+namespace SpeedTests
 {
     internal static class Program
     {
         private static void Main(string[] args)
         {
-            FloatChecks.FloatCompareTest();
-            DictionaryChecks.DictionaryTest();
-            StringChecks.StringConcatTesting();
-            StringChecks.StringConcatFormatTesting();
-            VectorChecks.VectorEqualTest();
-            VectorChecks.VectorAccessTest();
+            //SizeOfChecks.Check();
+            
+            //FloatChecks.FloatCompareTest();
+            //FloatChecks.FloatMaxTest();
+            //FloatChecks.FloatMinTest();
+            
+            //DictionaryChecks.DictionaryTest();
+            
+            //StringChecks.StringConcatTesting();
+            //StringChecks.StringConcatFormatTesting();
+            
+            //VectorChecks.VectorEqualTest();
+            //VectorChecks.VectorAccessTest();
+            VectorChecks.VectorMinTest();
         }
     }
 }
