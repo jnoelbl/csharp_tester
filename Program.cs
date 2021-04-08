@@ -1,4 +1,6 @@
 ﻿using System;
+using BenchmarkDotNet.Reports;
+using BenchmarkDotNet.Running;
 
 namespace SpeedTests
 {
@@ -19,7 +21,10 @@ namespace SpeedTests
             
             //VectorChecks.VectorEqualTest();
             //VectorChecks.VectorAccessTest();
-            VectorChecks.VectorMinTest();
+            //VectorChecks.VectorMinTest();
+
+            //Summary summary = BenchmarkRunner.Run<StringConcatTesting>();
+            Summary summary = BenchmarkRunner.Run<StringSplitVsStartsWithTesting>();
         }
     }
 }
