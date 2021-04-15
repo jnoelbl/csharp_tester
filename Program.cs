@@ -24,7 +24,9 @@ namespace SpeedTests
             //VectorChecks.VectorMinTest();
 
             //Summary summary = BenchmarkRunner.Run<StringConcatTesting>();
-            Summary summary = BenchmarkRunner.Run<StringSplitVsStartsWithTesting>();
+            //Summary summary = BenchmarkRunner.Run<StringSplitVsStartsWithTesting>();
+            //Summary summary = BenchmarkRunner.Run<ListChecks>();
+            Summary summary = BenchmarkRunner.Run<NullChecks>();
         }
     }
 }
